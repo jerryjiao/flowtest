@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="560" viewBox="0 0 940 560" role="img" aria-labelledby="title desc">
+  <title id="title">flowtest architecture</title>
+  <desc id="desc">Inside your coding agent (the Host), the flowtest engine skill runs the Plan, Run, Report, Learn loop and writes .flow.yaml, .result.json and report.md artifacts. The flowtest-kb KnowFlow workspace holds product notes and failure lessons and feeds them back into Plan. Run drives a real browser against the system under test.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+    </marker>
+    <marker id="arrow-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0d9488"/>
+    </marker>
+  </defs>
+
+  <!-- card background: self-contained so it reads the same in light and dark GitHub themes -->
+  <rect x="1" y="1" width="938" height="558" rx="16" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
+
+  <g font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+
+    <!-- Host container -->
+    <rect x="20" y="52" width="656" height="488" rx="14" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+    <text x="36" y="80" font-size="15" font-weight="700" fill="#0f172a">Your coding agent — the Host</text>
+    <text x="36" y="100" font-size="11" fill="#64748b">Claude Code · zcode · any SKILL.md-convention runtime</text>
+
+    <!-- Engine container -->
+    <rect x="40" y="116" width="416" height="284" rx="10" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5"/>
+    <text x="440" y="142" font-size="12.5" font-weight="700" fill="#1e40af" text-anchor="end">flowtest — the engine skill</text>
+
+    <!-- Stage boxes -->
+    <rect x="64" y="158" width="156" height="70" rx="8" fill="#ffffff" stroke="#60a5fa" stroke-width="1.5"/>
+    <text x="78" y="182" font-size="14" font-weight="700" fill="#0f172a">1 · Plan</text>
+    <text x="78" y="200" font-size="10" fill="#475569">intent → editable plan</text>
+    <text x="78" y="217" font-size="10" fill="#2563eb" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace">.flow.yaml</text>
+
+    <rect x="280" y="158" width="156" height="70" rx="8" fill="#ffffff" stroke="#60a5fa" stroke-width="1.5"/>
+    <text x="294" y="182" font-size="14" font-weight="700" fill="#0f172a">2 · Run</text>
+    <text x="294" y="200" font-size="10" fill="#475569">drives a real browser</text>
+    <text x="294" y="217" font-size="10" fill="#2563eb" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace">.result.json + shots</text>
+
+    <rect x="280" y="316" width="156" height="70" rx="8" fill="#ffffff" stroke="#60a5fa" stroke-width="1.5"/>
+    <text x="294" y="340" font-size="14" font-weight="700" fill="#0f172a">3 · Report</text>
+    <text x="294" y="358" font-size="10" fill="#475569">for humans and agents</text>
+    <text x="294" y="375" font-size="10" fill="#2563eb" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace">report.md</text>
+
+    <rect x="64" y="316" width="156" height="70" rx="8" fill="#ffffff" stroke="#60a5fa" stroke-width="1.5"/>
+    <text x="78" y="340" font-size="14" font-weight="700" fill="#0f172a">4 · Learn</text>
+    <text x="78" y="358" font-size="10" fill="#475569">distills failure notes</text>
+    <text x="78" y="375" font-size="10" fill="#2563eb" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace">kb note</text>
+
+    <!-- Engine loop arrows -->
+    <path d="M 220 193 L 272 193" fill="none" stroke="#475569" stroke-width="1.8" marker-end="url(#arrow)"/>
+    <path d="M 358 228 L 358 308" fill="none" stroke="#475569" stroke-width="1.8" marker-end="url(#arrow)"/>
+    <path d="M 280 351 L 228 351" fill="none" stroke="#475569" stroke-width="1.8" marker-end="url(#arrow)"/>
+    <path d="M 142 316 L 142 234" fill="none" stroke="#475569" stroke-width="1.8" marker-end="url(#arrow)"/>
+
+    <!-- KB container -->
+    <rect x="40" y="432" width="416" height="88" rx="10" fill="#f0fdfa" stroke="#14b8a6" stroke-width="1.5"/>
+    <text x="64" y="458" font-size="13" font-weight="700" fill="#134e4a">flowtest-kb — KnowFlow workspace</text>
+    <text x="64" y="478" font-size="10.5" fill="#0f766e">product notes · failure lessons · queried during Plan</text>
+    <text x="64" y="496" font-size="10" font-style="italic" fill="#64748b">local files on your machine — nothing leaves it</text>
+
+    <!-- Learn → KB -->
+    <path d="M 142 386 L 142 426" fill="none" stroke="#0d9488" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrow-teal)"/>
+    <text x="154" y="410" font-size="10" fill="#0d9488">distill lessons</text>
+
+    <!-- KB → Plan (the feedback that sharpens future plans) -->
+    <path d="M 54 424 L 54 104 L 142 104 L 142 150" fill="none" stroke="#0d9488" stroke-width="2.2" stroke-dasharray="6 4" marker-end="url(#arrow-teal)"/>
+
+    <!-- Browser + SUT -->
+    <rect x="712" y="116" width="208" height="96" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+    <text x="728" y="148" font-size="13" font-weight="700" fill="#0f172a">Real browser</text>
+    <text x="728" y="168" font-size="10" fill="#64748b">agent-browser CLI or your</text>
+    <text x="728" y="182" font-size="10" fill="#64748b">host's browser tooling</text>
+
+    <rect x="712" y="280" width="208" height="96" rx="10" fill="#fffbeb" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="728" y="312" font-size="13" font-weight="700" fill="#78350f">System under test</text>
+    <text x="728" y="332" font-size="10" fill="#92400e">your app — or the bundled</text>
+    <text x="728" y="346" font-size="10" fill="#92400e">demo site</text>
+
+    <!-- Run → Browser → SUT -->
+    <path d="M 436 193 L 704 193" fill="none" stroke="#475569" stroke-width="1.8" marker-end="url(#arrow)"/>
+    <text x="556" y="186" font-size="10" font-style="italic" fill="#64748b">drives</text>
+    <path d="M 816 212 L 816 274" fill="none" stroke="#475569" stroke-width="1.8" marker-end="url(#arrow)"/>
+    <text x="826" y="247" font-size="10" font-style="italic" fill="#64748b">loads</text>
+
+    <!-- Legend -->
+    <path d="M 712 486 L 754 486" fill="none" stroke="#475569" stroke-width="1.8" marker-end="url(#arrow)"/>
+    <text x="766" y="490" font-size="10" fill="#475569">engine loop</text>
+    <path d="M 712 514 L 754 514" fill="none" stroke="#0d9488" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrow-teal)"/>
+    <text x="766" y="518" font-size="10" fill="#475569">knowledge-base feedback</text>
+  </g>
+</svg>
