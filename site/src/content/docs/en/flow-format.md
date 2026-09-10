@@ -5,9 +5,9 @@ description: .flow.yaml v1 — one YAML file per user journey.
 
 A Flow is a YAML test plan describing one user journey: an ordered list of
 steps against a System Under Test (SUT), each with an action, an optional
-target, and optional expected conditions. Flows are written for humans and
-agents alike — short enough to read in one screen, strict enough to validate
-mechanically.
+target, and optional expected conditions. A flow file is written both for
+humans to read and for machines to validate: it reads in one screen and
+validates mechanically.
 
 ```bash
 python3 skills/flowtest/scripts/validate_flow.py path/to/flow.flow.yaml

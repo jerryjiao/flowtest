@@ -33,7 +33,7 @@ The engine skill takes over:
 
 ## 3. Read the report
 
-The run writes, before printing anything:
+Results are written to files first, then summarized:
 
 - `flowtest/reports/demo-smoke.<timestamp>.result.json` — machine-readable:
   verdict, per-step statuses, durations, evidence paths.

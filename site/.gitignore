@@ -1,3 +1,7 @@
 node_modules/
 dist/
 .astro/
+
+# changelog pages are generated from the root CHANGELOG.md by
+# scripts/sync-changelog.mjs at predev/prebuild — do not commit or hand-edit.
+src/content/docs/*/changelog.md

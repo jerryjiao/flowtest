@@ -4,9 +4,9 @@ description: The in-repo System Under Test — deterministic, offline, zero-depe
 ---
 
 The demo site is a single HTML file (`demo/index.html`) with a sign-in gate
-and a task list — enough surface for a real flow: add, rename, complete,
-delete. It exists so a fresh clone can run its first flow in minutes: no
-build step, no network, deterministic data.
+and a task list, covering every operation a complete flow needs: add,
+rename, complete, delete. It exists so a fresh clone can run its first flow
+in minutes: no build step, no network, deterministic data.
 
 ## Serve it
 

@@ -3,7 +3,7 @@ title: 知识库
 description: flowtest 的记忆——可选的 KnowFlow 知识库。
 ---
 
-Learn 是乘数：没有沉淀教训的失败还会再来。flowtest 的知识层放在
+失败不记下来，同样的坑下次还会踩。flowtest 的知识层放在
 [KnowFlow](https://github.com/jerryjiao/knowflow) 工作区——纯 Markdown、
 人审、本地检索、无服务器。`flowtest-kb` 技能是引擎与 KnowFlow 之间的
 薄契约。
@@ -30,5 +30,5 @@ wiki 入库，索引不入库。
 - 对纯 Markdown wiki 的关键词检索——即技能规定的用法（2–4 条短查询，
   而非一条长查询）——在教训规模的语料上稳定命中。
 
-**结论：可用，但不是魔法——知识库保持可选。** 引擎永远不强制要求知识库；
+**结论：能用，但保持可选。** 引擎永远不强制要求知识库；
 语义检索是增强项，不是前置条件。

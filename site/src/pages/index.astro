@@ -1,5 +1,42 @@
 ---
-import Landing from '../components/Landing.astro';
+// Root entry: the site is now Starlight-native — /en/ and /zh/ are the
+// splash homepages. Root redirects: zh visitors (localStorage preference
+// or browser language) go to /zh/, everyone else to /en/. Deep links are
+// never hijacked; only the bare root path lands here.
+const base = import.meta.env.BASE_URL;
+const en = `${base}en/`;
+const zh = `${base}zh/`;
 ---
 
-<Landing lang="en" />
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="refresh" content={`0; url=${en}`} />
+    <title>flowtest — redirecting…</title>
+    <script is:inline define:vars={{ en, zh }}>
+      (function () {
+        var pref = null;
+        try {
+          pref = localStorage.getItem('ft-lang');
+        } catch (e) {
+          /* storage blocked: fall through to browser language */
+        }
+        var wantsZh = pref === 'zh';
+        if (!wantsZh && pref !== 'en') {
+          var langs = navigator.languages || [navigator.language || ''];
+          for (var i = 0; i < langs.length; i++) {
+            if (String(langs[i] || '').toLowerCase().indexOf('zh') === 0) {
+              wantsZh = true;
+              break;
+            }
+          }
+        }
+        location.replace(wantsZh ? zh : en);
+      })();
+    </script>
+  </head>
+  <body>
+    <p>Redirecting to the <a href={en}>flowtest homepage</a>.</p>
+  </body>
+</html>

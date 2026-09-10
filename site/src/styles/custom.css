@@ -1,0 +1,267 @@
+/* flowtest 官网自定义样式 — ai-study-kit 同款配方（2026-09 官网改版共识）：
+   Starlight 皮肤 + 毛玻璃页头 + indigo→cyan 渐变顶线 + .ft-* 命名空间首页组件。
+   旧 landing.css 的「flat 无渐变」规则随自研落地页一并作废。 */
+
+:root {
+  --sl-accent: oklch(51.1% 0.547 276.5);   /* indigo-600 #4f46e5 */
+  --sl-accent-text: oklch(98.2% 0.018 155.8);
+  --ft-gradient: linear-gradient(90deg, #4f46e5, #06b6d4);
+}
+
+/* 品牌化：链接 hover、当前页指示跟 accent */
+.main a:hover {
+  color: var(--sl-accent);
+}
+
+/* —— 页头：毛玻璃底 + 渐变顶线（Starlight PageFrame 的 header.header 外壳上直接覆盖）—— */
+header.header {
+  background: rgba(255, 255, 255, 0.86);
+  -webkit-backdrop-filter: blur(12px) saturate(1.5);
+  backdrop-filter: blur(12px) saturate(1.5);
+}
+:root[data-theme='dark'] header.header {
+  background: color-mix(in oklab, #12141c 84%, transparent);
+}
+header.header::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: var(--ft-gradient);
+  pointer-events: none;
+}
+.site-title span {
+  color: var(--sl-color-text);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.site-title img {
+  border-radius: 0.4rem;
+}
+
+/* —— splash hero：左标题右卡片（Starlight Hero ≥50rem 双栏）—— */
+@media (min-width: 50rem) {
+  .hero {
+    grid-template-columns: 1.15fr 1fr;
+    gap: 2.5rem;
+    padding-block: clamp(2.5rem, calc(1rem + 4vmin), 4rem);
+  }
+}
+.hero > .hero-html {
+  position: relative;
+  z-index: 0;
+  width: min(100%, 26rem);
+}
+.hero > .hero-html::before {
+  content: '';
+  position: absolute;
+  inset: -14%;
+  background: radial-gradient(closest-side, rgba(79, 70, 229, 0.16), transparent 70%);
+  z-index: -1;
+}
+
+/* hero 下方的规格条：一行三个事实，中点分隔 */
+.ft-lead {
+  max-width: 48rem;
+  margin: 0 auto 0.5rem;
+  padding: 0 1.5rem;
+}
+.ft-lead-strip {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: var(--sl-color-gray-3);
+}
+.ft-lead-strip span {
+  white-space: nowrap;
+}
+.ft-lead-strip span + span::before {
+  content: '·';
+  margin: 0 0.8rem;
+  color: var(--sl-color-gray-5);
+  font-weight: 700;
+}
+
+/* —— hero 右侧：.flow.yaml 代码卡片（真实 artifact，非 mock）—— */
+.ft-card {
+  border-radius: 0.9rem;
+  border: 1px solid var(--sl-color-gray-6);
+  box-shadow: 0 30px 60px -20px rgba(15, 23, 42, 0.25);
+  overflow: hidden;
+  background: var(--sl-color-gray-7);
+}
+.ft-card-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.7rem 0.9rem;
+  border-bottom: 1px solid var(--sl-color-gray-6);
+}
+.ft-card-bar i {
+  width: 0.65rem; height: 0.65rem; border-radius: 50%;
+  background: var(--sl-color-gray-5);
+}
+.ft-card-bar .ft-card-file {
+  margin-left: 0.4rem;
+  font-size: 0.72rem;
+  color: var(--sl-color-gray-3);
+  font-family: var(--sl-font-mono);
+}
+.ft-card pre {
+  margin: 0;
+  padding: 1.1rem 1.2rem 1.3rem;
+  overflow: auto;
+  font-size: 0.72rem;
+  line-height: 1.75;
+  font-family: var(--sl-font-mono);
+  color: var(--sl-color-gray-2);
+}
+.ft-card .k { color: #4f46e5; font-weight: 600; }
+:root[data-theme='dark'] .ft-card .k { color: #a5b4fc; }
+.ft-card .s { color: #0e7490; }
+:root[data-theme='dark'] .ft-card .s { color: #67e8f9; }
+.ft-card .c { color: var(--sl-color-gray-4); }
+
+/* —— 首页区块通用：统一最大宽度与节奏 —— */
+.ft-section { max-width: 72rem; margin: 0 auto; padding: 2.8rem 1.5rem; }
+.ft-section-head { text-align: center; margin-bottom: 2.2rem; }
+.ft-section-head h2 { font-size: 1.65rem; font-weight: 800; letter-spacing: -0.01em; margin-bottom: 0.5rem; }
+.ft-section-head p { color: var(--sl-color-gray-3); font-size: 0.98rem; max-width: 44rem; margin: 0 auto; }
+
+/* 卡片网格：four moves（4 列）与 details（3 列）共用卡片样式 */
+.ft-feats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; align-items: stretch; }
+.ft-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; align-items: stretch; }
+@media (max-width: 60rem) {
+  .ft-feats { grid-template-columns: repeat(2, 1fr); }
+  .ft-grid { grid-template-columns: repeat(2, 1fr); }
+}
+.ft-feat {
+  border: 1px solid var(--sl-color-gray-6);
+  border-radius: 0.9rem;
+  padding: 1.3rem 1.1rem;
+  background: var(--sl-color-gray-7);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.ft-feat .ico {
+  width: 2.4rem; height: 2.4rem;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 0.8rem;
+  border-radius: 0.65rem;
+  background: #eef2ff;
+  color: #4f46e5;
+}
+:root[data-theme='dark'] .ft-feat .ico {
+  background: color-mix(in oklab, #4f46e5 22%, transparent);
+  color: #c7d2fe;
+}
+.ft-feat .ico svg { width: 1.25rem; height: 1.25rem; }
+.ft-feat b { display: block; font-size: 0.95rem; margin-bottom: 0.45rem; }
+.ft-feat span { font-size: 0.82rem; color: var(--sl-color-gray-3); line-height: 1.65; display: block; }
+.ft-feat code {
+  font-size: 0.78em;
+  color: var(--sl-accent);
+}
+
+/* pain + 实拍区：左论点右录屏 */
+.ft-duo {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 2.2rem;
+  align-items: center;
+}
+@media (max-width: 60rem) { .ft-duo { grid-template-columns: 1fr; } }
+.ft-pain p { color: var(--sl-color-gray-2); line-height: 1.8; margin: 0 0 1rem; }
+.ft-pain p:last-child { margin-bottom: 0; }
+.ft-pain em { font-style: normal; font-weight: 700; color: var(--sl-color-text); }
+.ft-shot {
+  border-radius: 0.9rem;
+  border: 1px solid var(--sl-color-gray-6);
+  overflow: hidden;
+  background: var(--sl-color-gray-7);
+  box-shadow: 0 30px 60px -20px rgba(15, 23, 42, 0.25);
+}
+.ft-shot img { display: block; width: 100%; height: auto; }
+.ft-shot figcaption {
+  padding: 0.7rem 1rem;
+  border-top: 1px solid var(--sl-color-gray-6);
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: var(--sl-color-gray-3);
+}
+
+/* 三步快启：等高、代码块底对齐 */
+.ft-steps { max-width: 58rem; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; align-items: stretch; }
+@media (max-width: 60rem) { .ft-steps { grid-template-columns: 1fr; } }
+.ft-step {
+  border: 1px dashed var(--sl-color-gray-5);
+  border-radius: 0.9rem; padding: 1.5rem 1.2rem; text-align: center;
+  display: flex; flex-direction: column; align-items: center;
+}
+.ft-step .n {
+  width: 2.1rem; height: 2.1rem; border-radius: 50%;
+  background: var(--ft-gradient); color: #fff; font-weight: 800; font-size: 0.95rem;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 0.9rem;
+}
+.ft-step code {
+  display: block; width: 100%; box-sizing: border-box;
+  font-size: 0.78rem; line-height: 1.6;
+  background: var(--sl-color-gray-7); border-radius: 0.45rem;
+  padding: 0.55rem 0.6rem; margin-top: auto; overflow: auto;
+  white-space: normal; word-break: break-word;
+}
+.ft-step > span:not(.n) { margin-top: 0.7rem; }
+
+/* 信任边界：列表 + 底部说明卡 */
+.ft-bounds { max-width: 58rem; margin: 0 auto; }
+.ft-bounds ul { list-style: none; margin: 0 auto 1.4rem; padding: 0; max-width: 46rem; display: grid; gap: 0.9rem; }
+.ft-bounds li {
+  display: flex; gap: 0.8rem; align-items: flex-start;
+  color: var(--sl-color-gray-2); line-height: 1.75; font-size: 0.92rem;
+}
+.ft-bounds li svg {
+  flex: none;
+  width: 1.15rem; height: 1.15rem; margin-top: 0.3rem;
+  color: #10b981;
+}
+:root[data-theme='dark'] .ft-bounds li svg { color: #6ee7b7; }
+.ft-quote {
+  border-left: 3px solid var(--sl-accent);
+  background: color-mix(in oklab, #4f46e5 6%, var(--sl-color-gray-7));
+  border-radius: 0.5rem;
+  padding: 0.9rem 1.1rem;
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: var(--sl-color-gray-2);
+}
+
+/* 尾部 CTA */
+.ft-cta {
+  text-align: center;
+  max-width: 46rem;
+  margin: 0 auto;
+  border: 1px solid var(--sl-color-gray-6);
+  border-radius: 1rem;
+  padding: 2.4rem 1.5rem;
+  background: var(--sl-color-gray-7);
+}
+.ft-cta h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 0.5rem; letter-spacing: -0.01em; }
+.ft-cta p { color: var(--sl-color-gray-3); font-size: 0.95rem; margin-bottom: 1.4rem; }
+.ft-cta a.cta {
+  display: inline-block;
+  background: var(--ft-gradient);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border-radius: 0.55rem;
+  padding: 0.7rem 1.5rem;
+}
+.ft-cta a.cta:hover { text-decoration: none; filter: brightness(1.08); }
+
+/* splash 页正文顶边距（hero 之后的首个区块） */
+.main .ft-section:first-of-type { padding-top: 1.2rem; }

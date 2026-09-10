@@ -5,13 +5,12 @@ description: What flowtest is, who it is for, and the shape of the loop.
 
 flowtest is **natural-language browser testing for coding agents**. You
 describe a user journey; your agent turns it into a `.flow.yaml` plan, runs
-it in a real browser, reports pass/fail with evidence, and learns from
-failures.
+it in a real browser, records a screenshot and a timing for every step, and
+writes failures down as notes.
 
 It ships as **agent skills, not a framework**. Your existing coding agent
 (Claude Code, zcode, or any host that follows the SKILL.md convention) is
-the runtime — no new lock-in, no daemon, and the same agent that writes your
-app can test it.
+the runtime — there is no new service to install and no daemon.
 
 ## The loop
 
@@ -19,18 +18,19 @@ app can test it.
   and check out") becomes a structured `.flow.yaml` you can read, edit, and
   version. Nothing executes before you confirm it.
 - **Run** — the agent drives a real browser step by step using semantic
-  locators (`button 'Sign in'`, `textbox 'Email'`) — no CSS selectors, no
-  brittle selectors rotting on redesigns.
+  locators (`button 'Sign in'`, `textbox 'Email'`) — no CSS selectors, and
+  nothing to update when the page is redesigned.
 - **Report** — every step lands as `PASSED` / `HEALED` / `FAILED` /
-  `SKIPPED` with screenshots and timings, written to disk before any
-  summary is spoken.
+  `SKIPPED` with a screenshot and a timing; the result is written to disk
+  first, then a summary is generated.
 - **Learn** — failed runs distill into knowledge-base notes (optional,
   [KnowFlow](https://github.com/jerryjiao/knowflow)) so future Plans avoid
   known traps.
 
 ## What it is not
 
-- Not a test framework you adopt — no runner process, no config lattice.
+- Not a test framework — no runner process, no config matrix, nothing to
+  migrate to.
 - Not a cloud service — everything runs on your machine, in your agent.
 - Not multi-project orchestration — one System Under Test (SUT) at a time.
 

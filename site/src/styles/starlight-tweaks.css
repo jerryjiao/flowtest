@@ -1,8 +1,0 @@
-/* flowtest docs — tie Starlight's accent to the brand indigo. */
-
-:root {
-  --sl-hue: 249;
-  --sl-accent-low: hsl(249, 84%, 24%);
-  --sl-accent: hsl(249, 84%, 48%);
-  --sl-accent-high: hsl(249, 84%, 72%);
-}

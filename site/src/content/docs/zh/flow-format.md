@@ -4,8 +4,8 @@ description: .flow.yaml v1 —— 一段用户旅程一个 YAML 文件。
 ---
 
 流程（Flow）是描述一段用户旅程的 YAML 测试计划：针对被测系统（SUT）
-的有序步骤列表，每步带动作、可选目标、可选期望条件。流程同时为人和
-代理而写——一屏读得完，又严格到可以机械校验。
+的有序步骤列表，每步带动作、可选目标、可选期望条件。流程文件同时写给
+人读和给机器校验：一屏读得完，也能机械校验。
 
 ```bash
 python3 skills/flowtest/scripts/validate_flow.py path/to/flow.flow.yaml

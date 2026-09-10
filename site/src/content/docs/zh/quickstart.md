@@ -32,7 +32,7 @@ python3 -m http.server 4173 -d demo
 
 ## 3. 读报告
 
-运行先落盘，后说话：
+结果先写进文件，再输出摘要：
 
 - `flowtest/reports/demo-smoke.<时间戳>.result.json` —— 机器可读：结论、
   每步状态、耗时、证据路径。

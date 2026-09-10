@@ -3,8 +3,8 @@ title: Knowledge base
 description: flowtest's memory — an optional KnowFlow workspace of lessons.
 ---
 
-Learn is the multiplier: a failed run that produces no lesson will fail
-again. flowtest keeps its knowledge layer in a
+If failures aren't written down, the same traps get hit again. flowtest
+keeps its knowledge layer in a
 [KnowFlow](https://github.com/jerryjiao/knowflow) workspace — plain
 Markdown, reviewed by humans, searchable locally, no server. The
 `flowtest-kb` skill is the thin contract between the engine and KnowFlow.
@@ -34,6 +34,6 @@ On 2026-09-10 ([measurements](https://github.com/jerryjiao/flowtest/blob/main/do
   (2–4 short queries, not one long one) — reliably hits the right notes on
   a lessons-sized corpus.
 
-**Verdict: usable, not magic — the KB stays optional.** The engine never
+**Verdict: usable, and optional.** The engine never
 requires a knowledge base; semantic search is an upgrade, never a
 prerequisite.
