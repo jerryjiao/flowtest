@@ -1,0 +1,31 @@
+{
+  "name": "flowtest",
+  "description": "flowtest plugin marketplace: natural-language browser testing for coding agents (Plan → Run → Report → Learn).",
+  "owner": {
+    "name": "jerryjiao",
+    "url": "https://github.com/jerryjiao"
+  },
+  "plugins": [
+    {
+      "name": "flowtest",
+      "source": "./",
+      "description": "Natural-language browser testing for coding agents: describe the journey, your agent plans it as .flow.yaml, runs it in a real browser, reports, and learns from failures. 用自然语言驱动真实浏览器做端到端测试：描述用户旅程，代理生成 .flow.yaml 计划、执行、报告并从失败中学习。",
+      "version": "0.1.0",
+      "author": {
+        "name": "jerryjiao",
+        "url": "https://github.com/jerryjiao"
+      },
+      "homepage": "https://jerryjiao.github.io/flowtest/",
+      "keywords": [
+        "testing",
+        "e2e",
+        "browser-automation",
+        "llm",
+        "agent",
+        "skills",
+        "qa"
+      ],
+      "category": "testing"
+    }
+  ]
+}

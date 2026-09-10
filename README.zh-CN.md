@@ -2,13 +2,30 @@
 
 > 给编码 agent 用的自然语言浏览器测试：你描述用户旅程，agent 把它变成 `.flow.yaml` 测试计划，在真实浏览器里执行、出报告、并从失败中学习。
 
-**状态：v0.1 之前。** 引擎与知识库 skill 已在 [`skills/`](skills/)；demo 站与一键安装随 v0.1 落地——见[计划文档](docs/plans/2026-09-10-rebirth-consensus.md)。
-
 ```
 skills/flowtest/       引擎：Plan → Run → Report → Learn（含 .flow.yaml 格式与校验器）
 skills/flowtest-kb/    记忆：本地 KnowFlow 知识库（经验教训 + 产品笔记）
+demo/                  演示站点：零依赖的被测系统，示例流程的目标
+flowtest/              活的工作区：示例运行产物 + 种子知识库
 tests/                 flow 格式校验器测试 + 仓库结构与遗留绑定扫描门禁
 ```
+
+## 快速开始（实测：约 2 分钟跑通第一条流程）
+
+需要一个 SKILL.md 约定的宿主（Claude Code、zcode……）、带 PyYAML 的
+Python 3、任意静态文件服务器：
+
+```bash
+git clone https://github.com/jerryjiao/flowtest && cd flowtest
+python3 -m http.server 4173 -d demo        # 伺服演示站点
+```
+
+然后对你的 agent 说：**"运行 `skills/flowtest/examples/demo-smoke.flow.yaml`
+这条流程。"** 引擎 skill 接管：校验 → 解析变量 → 驱动真实浏览器 → 在
+`flowtest/reports/` 下写出 result JSON 与报告。
+
+想测自己的应用？描述旅程——"测试用户能用邮箱注册并看到确认页"——agent
+会起草流程，**经你确认后**才执行。
 
 ## 它做什么
 
@@ -23,7 +40,20 @@ flowtest 以 agent skill 形态发布，不是测试框架。你现有的编码 
 
 ## 安装
 
-随 v0.1 提供（Claude Code / zcode 插件安装；其他 SKILL.md 宿主可直接拷 `skills/` 目录）。
+**Claude Code / zcode（插件）：** 把本仓库加为 marketplace 再安装——两个
+skill（`flowtest`、`flowtest-kb`）自动发现：
+
+```bash
+claude plugin marketplace add jerryjiao/flowtest
+claude plugin install flowtest@flowtest
+```
+
+zcode 里：设置 → 插件管理 → Discover → **+** → `jerryjiao/flowtest` →
+**Get**。（安装已实测：`claude plugin install` 报告 *Skills (2): flowtest,
+flowtest-kb*；zcode 读取同一份 `.claude-plugin/` 清单。）
+
+**任意 SKILL.md 宿主：** 直接拷贝 [`skills/`](skills/) 目录——每个 skill
+自包含。
 
 ## 许可
 

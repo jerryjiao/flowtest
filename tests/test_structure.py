@@ -68,11 +68,38 @@ class PluginManifest(unittest.TestCase):
     def test_manifest_basics(self):
         for key in ("name", "version", "description", "author", "license"):
             self.assertIn(key, self.manifest)
+        # `skills` must NOT be declared: Claude Code rejects the field in its
+        # manifest schema and both hosts auto-discover skills/<name>/ anyway.
+        self.assertNotIn("skills", self.manifest)
+        # zcode manifest rule: name matches ^[a-z0-9][a-z0-9._-]{0,127}$
+        self.assertRegex(self.manifest["name"], r"^[a-z0-9][a-z0-9._-]{0,127}$")
+
+    def test_skills_discoverable_by_convention(self):
+        for name in SKILLS:
+            skill_md = REPO_ROOT / "skills" / name / "SKILL.md"
+            self.assertTrue(skill_md.exists(), f"missing {skill_md}")
+
+    def test_marketplace_json_registers_the_plugin(self):
+        market = json.loads(
+            (REPO_ROOT / ".claude-plugin" / "marketplace.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        self.assertEqual(market["name"], "flowtest")
+        self.assertEqual(len(market["plugins"]), 1)
+        entry = market["plugins"][0]
+        self.assertEqual(entry["name"], self.manifest["name"])
+        self.assertEqual(entry["source"], "./")
 
     def test_manifest_registers_both_skills(self):
-        self.assertEqual(
-            sorted(self.manifest["skills"]),
-            sorted(f"skills/{name}" for name in SKILLS),
+        # Skills are auto-discovered from skills/<name>/ (both Claude Code and
+        # zcode); the manifest itself must not carry a `skills` field.
+        self.assertNotIn("skills", self.manifest)
+        self.assertTrue(
+            all(
+                (REPO_ROOT / "skills" / name / "SKILL.md").exists()
+                for name in SKILLS
+            )
         )
 
 

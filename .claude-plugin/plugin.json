@@ -16,9 +16,5 @@
     "agent",
     "skills",
     "qa"
-  ],
-  "skills": [
-    "skills/flowtest",
-    "skills/flowtest-kb"
   ]
 }

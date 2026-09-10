@@ -2,13 +2,15 @@
 
 > Natural-language browser testing for coding agents: describe the user journey, your agent turns it into a `.flow.yaml` plan, runs it in a real browser, reports, and learns from failures.
 
-**Status: pre-v0.1.** The engine and knowledge-base skills are in [`skills/`](skills/); the demo site and one-command install land with v0.1 — see [the plan](docs/plans/2026-09-10-rebirth-consensus.md).
+**Docs & demo: [jerryjiao.github.io/flowtest](https://jerryjiao.github.io/flowtest/)** ·
+[中文说明](README.zh-CN.md)
 
 ```
 skills/flowtest/       the engine: Plan → Run → Report → Learn (+ .flow.yaml format & validator)
 skills/flowtest-kb/    the memory: a local KnowFlow workspace of lessons and product notes
 demo/                  the demo site: zero-dependency SUT for the example flows
 flowtest/              a live workspace: example run artifacts + seeded KnowFlow KB
+site/                  the website (Astro + Starlight), deployed to GitHub Pages
 tests/                 flow-format validator tests + repo structure & scrub gates
 ```
 
@@ -44,7 +46,20 @@ flowtest ships as agent skills, not a test framework. Your existing coding agent
 
 ## Install
 
-Lands with v0.1 (plugin install for Claude Code / zcode; copyable `skills/` folder for other SKILL.md hosts).
+**Claude Code / zcode (plugin):** add this repo as a marketplace, then install —
+the two skills (`flowtest`, `flowtest-kb`) are discovered automatically:
+
+```bash
+claude plugin marketplace add jerryjiao/flowtest
+claude plugin install flowtest@flowtest
+```
+
+In zcode: Settings → Plugin Management → Discover → **+** → `jerryjiao/flowtest`
+→ **Get**. (Verified install: `claude plugin install` reports *Skills (2):
+flowtest, flowtest-kb*; zcode reads the same `.claude-plugin/` manifests.)
+
+**Any SKILL.md host:** copy the [`skills/`](skills/) directory — each skill is
+self-contained.
 
 ## License
 
