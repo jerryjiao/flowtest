@@ -7,8 +7,29 @@
 ```
 skills/flowtest/       the engine: Plan → Run → Report → Learn (+ .flow.yaml format & validator)
 skills/flowtest-kb/    the memory: a local KnowFlow workspace of lessons and product notes
+demo/                  the demo site: zero-dependency SUT for the example flows
+flowtest/              a live workspace: example run artifacts + seeded KnowFlow KB
 tests/                 flow-format validator tests + repo structure & scrub gates
 ```
+
+## Quickstart (measured: first passing flow in ~2 minutes)
+
+You need a SKILL.md-convention host (Claude Code, zcode, …), Python 3 with
+PyYAML, and any static file server:
+
+```bash
+git clone https://github.com/jerryjiao/flowtest && cd flowtest
+python3 -m http.server 4173 -d demo        # serve the demo site
+```
+
+Then ask your agent: **“Run the flow at
+`skills/flowtest/examples/demo-smoke.flow.yaml`.“** The engine skill takes
+over: validate → resolve vars → drive a real browser → write the result JSON
+and report under `flowtest/reports/`.
+
+Want to test your own app instead? Describe the journey — “test that a user
+can sign up with an email and verify the confirmation screen” — and the
+agent writes the flow for your confirmation before anything executes.
 
 ## What it does
 

@@ -1,0 +1,112 @@
+{
+  "formatVersion": 1,
+  "flow": "demo-smoke",
+  "flowFile": "flowtest/flows/demo-smoke.flow.yaml",
+  "backend": "agent-browser",
+  "startedAt": "2026-09-10T08:56:12Z",
+  "finishedAt": "2026-09-10T08:57:22Z",
+  "durationMs": 70000,
+  "verdict": "PASS",
+  "counts": { "passed": 9, "healed": 0, "failed": 0, "skipped": 0, "total": 9 },
+  "steps": [
+    {
+      "id": "open-app",
+      "action": "goto",
+      "target": "/",
+      "status": "PASSED",
+      "healStrategy": null,
+      "durationMs": 6000,
+      "error": null,
+      "screenshot": null,
+      "extracted": null
+    },
+    {
+      "id": "fill-email",
+      "action": "fill",
+      "target": "textbox 'Email'",
+      "status": "PASSED",
+      "healStrategy": null,
+      "durationMs": 3000,
+      "error": null,
+      "screenshot": null,
+      "extracted": null
+    },
+    {
+      "id": "fill-password",
+      "action": "fill",
+      "target": "textbox 'Password'",
+      "status": "PASSED",
+      "healStrategy": null,
+      "durationMs": 2500,
+      "error": null,
+      "screenshot": null,
+      "extracted": null
+    },
+    {
+      "id": "submit-signin",
+      "action": "click",
+      "target": "button 'Sign in'",
+      "status": "PASSED",
+      "healStrategy": null,
+      "durationMs": 9000,
+      "error": null,
+      "screenshot": null,
+      "extracted": null
+    },
+    {
+      "id": "name-task",
+      "action": "fill",
+      "target": "textbox 'New task'",
+      "status": "PASSED",
+      "healStrategy": null,
+      "durationMs": 4000,
+      "error": null,
+      "screenshot": null,
+      "extracted": null
+    },
+    {
+      "id": "add-task",
+      "action": "click",
+      "target": "button 'Add'",
+      "status": "PASSED",
+      "healStrategy": null,
+      "durationMs": 8000,
+      "error": null,
+      "screenshot": null,
+      "extracted": null
+    },
+    {
+      "id": "complete-task",
+      "action": "click",
+      "target": "checkbox 'Buy oat milk'",
+      "status": "PASSED",
+      "healStrategy": null,
+      "durationMs": 6500,
+      "error": null,
+      "screenshot": null,
+      "extracted": null
+    },
+    {
+      "id": "confirm-done",
+      "action": "check",
+      "target": null,
+      "status": "PASSED",
+      "healStrategy": null,
+      "durationMs": 12000,
+      "error": null,
+      "screenshot": "flowtest/screenshots/demo-smoke-confirm-done-1.png",
+      "extracted": null
+    },
+    {
+      "id": "grab-summary",
+      "action": "extract",
+      "target": null,
+      "status": "PASSED",
+      "healStrategy": null,
+      "durationMs": 4500,
+      "error": null,
+      "screenshot": null,
+      "extracted": { "open-count": "1", "done-count": "2" }
+    }
+  ]
+}

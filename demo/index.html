@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>flowtest demo site</title>
+  <style>
+    :root {
+      --ink: #1f2430;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+      --accent: #4f46e5;
+      --accent-ink: #ffffff;
+      --danger: #b91c1c;
+      --ok: #047857;
+      --card: #ffffff;
+      --bg: #f6f7fb;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font: 16px/1.55 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+    }
+    main {
+      max-width: 34rem;
+      margin: 3rem auto;
+      padding: 0 1.25rem;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 0.75rem;
+      padding: 1.75rem;
+    }
+    h1 { font-size: 1.5rem; margin: 0 0 0.25rem; }
+    .sub { color: var(--muted); margin: 0 0 1.5rem; }
+    label { display: block; font-weight: 600; margin: 1rem 0 0.25rem; }
+    input[type="email"], input[type="password"], input[type="text"] {
+      width: 100%;
+      padding: 0.55rem 0.7rem;
+      border: 1px solid var(--line);
+      border-radius: 0.45rem;
+      font: inherit;
+    }
+    input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+    button {
+      font: inherit;
+      border: none;
+      border-radius: 0.45rem;
+      padding: 0.55rem 1rem;
+      cursor: pointer;
+    }
+    button.primary { background: var(--accent); color: var(--accent-ink); }
+    button.ghost { background: transparent; color: var(--muted); padding: 0.35rem 0.6rem; }
+    button.small { font-size: 0.85rem; padding: 0.3rem 0.65rem; }
+    #signin-form button[type="submit"] { margin-top: 1.25rem; width: 100%; }
+    .error {
+      color: var(--danger);
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      border-radius: 0.45rem;
+      padding: 0.5rem 0.75rem;
+      margin-top: 1rem;
+    }
+    .hint {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-top: 1.25rem;
+      border-top: 1px dashed var(--line);
+      padding-top: 0.9rem;
+    }
+    .toolbar { display: flex; gap: 0.5rem; align-items: center; }
+    .toolbar .grow { flex: 1; }
+    #new-task-form { display: flex; gap: 0.5rem; margin: 1rem 0 0.5rem; }
+    #new-task-form input { flex: 1; }
+    #summary { color: var(--muted); margin: 0.75rem 0 0; font-size: 0.95rem; }
+    ul#task-list { list-style: none; margin: 1rem 0 0; padding: 0; }
+    ul#task-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.6rem 0.25rem;
+      border-bottom: 1px solid var(--line);
+    }
+    ul#task-list li:last-child { border-bottom: none; }
+    ul#task-list .name { flex: 1; }
+    ul#task-list li.done .name { text-decoration: line-through; color: var(--muted); }
+    ul#task-list .meta { display: flex; gap: 0.35rem; }
+    .empty { color: var(--muted); padding: 1rem 0; }
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; margin: -1px;
+      clip: rect(0 0 0 0); clip-path: inset(50%); overflow: hidden; white-space: nowrap;
+    }
+    .app-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+    kbd {
+      background: #eef0f6; border: 1px solid var(--line); border-bottom-width: 2px;
+      border-radius: 0.3rem; padding: 0.05rem 0.4rem; font-size: 0.85em;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <!-- Signed-out view: the sign-in form targeted by demo-smoke.flow.yaml -->
+    <section id="signin-view" class="card" hidden>
+      <h1>Sign in</h1>
+      <p class="sub">Sign in to the flowtest demo task list.</p>
+      <form id="signin-form" novalidate>
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" autocomplete="username" value="" />
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" value="" />
+        <p id="signin-error" class="error" role="alert" hidden>Invalid credentials</p>
+        <button class="primary" type="submit">Sign in</button>
+      </form>
+      <p class="hint">
+        Demo account: <kbd>demo@flowtest.dev</kbd> / <kbd>demo-password</kbd> —
+        any other combination is rejected.
+      </p>
+    </section>
+
+    <!-- Signed-in view: the task list app (list CRUD) -->
+    <section id="app-view" class="card" hidden>
+      <div class="app-head">
+        <h1>Tasks</h1>
+        <div class="toolbar">
+          <span id="who" class="grow"></span>
+          <button id="signout" class="ghost small" type="button">Sign out</button>
+        </div>
+      </div>
+      <p class="sub">A tiny task list — enough surface for a flow: add, rename, complete, delete.</p>
+
+      <form id="new-task-form">
+        <label for="new-task" class="sr-only">New task</label>
+        <input id="new-task" name="new-task" type="text" placeholder="New task…" value="" />
+        <button class="primary" type="submit">Add</button>
+      </form>
+
+      <!-- Extract targets: data-field attributes hold the values the
+           demo-smoke flow's `extract` step reads (open-count, done-count). -->
+      <p id="summary">
+        <span data-field="open-count">0</span> open ·
+        <span data-field="done-count">0</span> done
+      </p>
+
+      <ul id="task-list" aria-label="Tasks"></ul>
+      <p id="empty-list" class="empty" hidden>No tasks yet — add one above.</p>
+
+      <p class="hint">
+        <button id="reset-demo" class="ghost small" type="button">Reset demo data</button>
+        resets the seeded task list for a deterministic re-run.
+      </p>
+    </section>
+  </main>
+
+  <script>
+    // Deterministic demo state: seeded tasks, session in sessionStorage so
+    // every fresh browser session starts signed out.
+    "use strict";
+
+    var SEED = [
+      { id: 1, name: "Set up flowtest", done: true },
+      { id: 2, name: "Write first flow", done: false },
+    ];
+    var DEMO_USER = { email: "demo@flowtest.dev", password: "demo-password" };
+
+    var TASKS_KEY = "flowtest-demo-tasks";
+    var SESSION_KEY = "flowtest-demo-session";
+    var nextId = 3;
+
+    function loadTasks() {
+      try {
+        var raw = localStorage.getItem(TASKS_KEY);
+        if (!raw) return seed();
+        var tasks = JSON.parse(raw);
+        if (!Array.isArray(tasks)) return seed();
+        tasks.forEach(function (t) {
+          if (t.id >= nextId) nextId = t.id + 1;
+        });
+        return tasks;
+      } catch (e) {
+        return seed();
+      }
+    }
+    function seed() {
+      localStorage.setItem(TASKS_KEY, JSON.stringify(SEED));
+      return SEED.slice();
+    }
+    function saveTasks(tasks) {
+      localStorage.setItem(TASKS_KEY, JSON.stringify(tasks));
+    }
+
+    var tasks = loadTasks();
+
+    function signedIn() {
+      return sessionStorage.getItem(SESSION_KEY) === DEMO_USER.email;
+    }
+
+    // --- rendering ---------------------------------------------------------
+    function el(tag, attrs, children) {
+      var node = document.createElement(tag);
+      Object.keys(attrs || {}).forEach(function (k) {
+        if (k === "text") node.textContent = attrs[k];
+        else node.setAttribute(k, attrs[k]);
+      });
+      (children || []).forEach(function (c) { node.appendChild(c); });
+      return node;
+    }
+
+    function render() {
+      var signinView = document.getElementById("signin-view");
+      var appView = document.getElementById("app-view");
+      signinView.hidden = signedIn();
+      appView.hidden = !signedIn();
+      if (!signedIn()) return;
+
+      document.getElementById("who").textContent = DEMO_USER.email;
+      var list = document.getElementById("task-list");
+      list.textContent = "";
+
+      var open = 0, done = 0;
+      tasks.forEach(function (task) { task.done ? done++ : open++; });
+      document.querySelector('[data-field="open-count"]').textContent = String(open);
+      document.querySelector('[data-field="done-count"]').textContent = String(done);
+      document.getElementById("empty-list").hidden = tasks.length > 0;
+
+      tasks.forEach(function (task) {
+        var nameSpan = el("span", { class: "name", text: task.name });
+
+        var check = el("input", { type: "checkbox" });
+        // Accessible name = task text, so flows can target
+        // checkbox 'Buy oat milk' (see flow-format.md, semantic locators).
+        check.setAttribute("aria-label", task.name);
+        check.setAttribute("aria-label", task.name);
+        check.checked = task.done;
+        check.addEventListener("change", function () {
+          task.done = check.checked;
+          saveTasks(tasks);
+          render();
+        });
+
+        var li = el("li", { class: task.done ? "done" : "", "data-task-id": String(task.id) }, [
+          check,
+          nameSpan,
+          el("span", { class: "meta" }, [
+            el("button", { class: "ghost small", type: "button", "aria-label": "Edit " + task.name, text: "Edit" }),
+            el("button", { class: "ghost small", type: "button", "aria-label": "Delete " + task.name, text: "Delete" }),
+          ]),
+        ]);
+
+        // Inline rename: swap the name span for a textbox, Enter/blur saves.
+        li.querySelector("button[aria-label^='Edit']").addEventListener("click", function () {
+          var box = el("input", { type: "text", value: task.name, "aria-label": "Rename " + task.name });
+          nameSpan.replaceWith(box);
+          box.focus();
+          box.select();
+          function commit() {
+            var v = box.value.trim();
+            if (v && v !== task.name) {
+              task.name = v;
+              saveTasks(tasks);
+            }
+            render();
+          }
+          box.addEventListener("keydown", function (ev) {
+            if (ev.key === "Enter") commit();
+            if (ev.key === "Escape") render();
+          });
+          box.addEventListener("blur", commit);
+        });
+
+        li.querySelector("button[aria-label^='Delete']").addEventListener("click", function () {
+          tasks = tasks.filter(function (t) { return t.id !== task.id; });
+          saveTasks(tasks);
+          render();
+        });
+
+        list.appendChild(li);
+      });
+    }
+
+    // --- sign-in -----------------------------------------------------------
+    document.getElementById("signin-form").addEventListener("submit", function (ev) {
+      ev.preventDefault();
+      var email = document.getElementById("email").value.trim();
+      var password = document.getElementById("password").value;
+      var error = document.getElementById("signin-error");
+      if (email === DEMO_USER.email && password === DEMO_USER.password) {
+        sessionStorage.setItem(SESSION_KEY, email);
+        document.getElementById("password").value = "";
+        error.hidden = true;
+        render();
+      } else {
+        error.hidden = false; // "Invalid credentials"
+      }
+    });
+
+    document.getElementById("signout").addEventListener("click", function () {
+      sessionStorage.removeItem(SESSION_KEY);
+      render();
+    });
+
+    // --- task CRUD ---------------------------------------------------------
+    document.getElementById("new-task-form").addEventListener("submit", function (ev) {
+      ev.preventDefault();
+      var input = document.getElementById("new-task");
+      var name = input.value.trim();
+      if (!name) return;
+      tasks.push({ id: nextId++, name: name, done: false });
+      input.value = "";
+      saveTasks(tasks);
+      render();
+    });
+
+    document.getElementById("reset-demo").addEventListener("click", function () {
+      tasks = seed();
+      nextId = 3;
+      saveTasks(tasks);
+      render();
+    });
+
+    render();
+  </script>
+</body>
+</html>

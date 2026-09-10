@@ -1,0 +1,12 @@
+{
+  "wiki": {
+    "root": "./wiki",
+    "rawDir": "./raw"
+  },
+  "graph": {
+    "output": "./graph/graph.html"
+  },
+  "health": {
+    "minFileSize": 100
+  }
+}

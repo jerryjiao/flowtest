@@ -26,7 +26,7 @@ flowtest is a fresh start: an internal LLM-driven browser-testing solution (Apri
 
 - **D0** — name check, scaffold (this repo), consensus + ADR-0001 + glossary, fresh history. ✅
 - **D1** — port the Engine skill; scrub all legacy bindings (IPs, vendor lock-ins, client-specific material); rewrite KB as a KnowFlow-contract skill. ✅ (2026-09-10: engine skill with Plan/Run/Report/Learn references + flow format v1 + validator, `flowtest-kb` skill; scrub gate automated in `tests/test_structure.py`)
-- **D2** — Demo Site; measure the end-to-end quickstart (Plan → Run → Report); measure KnowFlow recall quality for planning (downgrade to optional if weak); measure executor choice (agent-browser vs Playwright).
+- **D2** — Demo Site; measure the end-to-end quickstart (Plan → Run → Report); measure KnowFlow recall quality for planning (downgrade to optional if weak); measure executor choice (agent-browser vs Playwright). ✅ (2026-09-10: demo site + demo-smoke PASS 9/9 in 70s; executor priority kept per [ADR-0002](../adr/0002-executor-priority.md); KnowFlow keyword recall usable → KB stays optional — [measurements](../measurements/2026-09-10-d2.md))
 - **D3** — Website: in-repo `site/` on the knowflow recipe (Astro + Starlight), GitHub Pages deploy, landing page with demo GIF, docs section.
 - **D4** — plugin install verified in zcode; CI (structure tests + secret scan gate); publish v0.1 — repo, site, and plugin together.
 

@@ -114,6 +114,38 @@ class InternalLinks(unittest.TestCase):
                 )
 
 
+class DemoSite(unittest.TestCase):
+    """The demo site is the quickstart SUT — guard the semantic anchors the
+    shipped example flows target, so a refactor cannot silently break the
+    first flow a newcomer runs."""
+
+    def setUp(self):
+        self.html = (REPO_ROOT / "demo" / "index.html").read_text(encoding="utf-8")
+
+    def test_semantic_anchors_exist(self):
+        anchors = (
+            "<h1>Sign in</h1>",
+            "<h1>Tasks</h1>",
+            "<label for=\"email\">Email</label>",
+            "<label for=\"password\">Password</label>",
+            "<label for=\"new-task\" class=\"sr-only\">New task</label>",
+            ">Sign in</button>",
+            ">Add</button>",
+            ">Sign out</button>",
+            ">Reset demo data</button>",
+            "data-field=\"open-count\"",
+            "data-field=\"done-count\"",
+            "aria-label\", task.name",
+        )
+        for anchor in anchors:
+            self.assertIn(anchor, self.html, f"demo site lost anchor: {anchor!r}")
+
+    def test_demo_credentials_and_error_string(self):
+        self.assertIn("demo@flowtest.dev", self.html)
+        self.assertIn("demo-password", self.html)
+        self.assertIn("Invalid credentials", self.html)
+
+
 class ScrubGate(unittest.TestCase):
     """Release gate #2: zero legacy identifiers, secrets, hardcoded IPs."""
 
