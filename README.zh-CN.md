@@ -7,8 +7,12 @@ skills/flowtest/       引擎：Plan → Run → Report → Learn（含 .flow.ya
 skills/flowtest-kb/    记忆：本地 KnowFlow 知识库（经验教训 + 产品笔记）
 demo/                  演示站点：零依赖的被测系统，示例流程的目标
 flowtest/              活的工作区：示例运行产物 + 种子知识库
+site/                  官网（Astro + Starlight），部署在 GitHub Pages
 tests/                 flow 格式校验器测试 + 仓库结构与遗留绑定扫描门禁
 ```
+
+**文档与演示：[jerryjiao.github.io/flowtest](https://jerryjiao.github.io/flowtest/)** ·
+[English README](README.md)
 
 ## 快速开始（实测：约 2 分钟跑通第一条流程）
 
