@@ -2,7 +2,9 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
 // Sidebar labels are translated per locale via `translations`; the `← Website`
-// link points at the English landing, which auto-redirects zh browsers to /zh/.
+// link must be an absolute URL — Starlight prefixes internal-style paths with
+// the locale base, which turned '/flowtest/' into a 404 at /<locale>/flowtest/.
+// zh browsers hitting the English landing still auto-redirect to /zh/.
 const withZh = (en, zh) => ({ label: en, translations: { zh, 'zh-CN': zh } });
 
 export default defineConfig({
@@ -21,7 +23,7 @@ export default defineConfig({
         zh: { label: '简体中文', lang: 'zh-CN' },
       },
       sidebar: [
-        { ...withZh('← Website', '← 官网'), link: '/flowtest/' },
+        { ...withZh('← Website', '← 官网'), link: 'https://jerryjiao.github.io/flowtest/' },
         { ...withZh('Introduction', '简介'), slug: 'intro' },
         { ...withZh('Quickstart', '快速开始'), slug: 'quickstart' },
         { ...withZh('The flow format', '流程格式'), slug: 'flow-format' },
