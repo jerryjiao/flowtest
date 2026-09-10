@@ -26,6 +26,23 @@ const flowFormatUrl = `${base}${lang}/flow-format/`;
 const githubUrl = 'https://github.com/jerryjiao/flowtest';
 const demoGif = `${base}demo.gif`;
 
+// Icon set: feather-style line SVGs, stroke=currentColor (color comes from
+// landing.css). No emoji — the visual gate bans emoji icons.
+const svg = (body: string) =>
+  `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${body}</svg>`;
+const icons: Record<string, string> = {
+  route: svg('<circle cx="6" cy="19" r="2"/><circle cx="18" cy="3" r="2"/><path d="M8 19h6a4 4 0 0 0 0-8h-4a4 4 0 0 1 0-8h6"/>'),
+  play: svg('<polygon points="5 3 19 12 5 21 5 3"/>'),
+  clipboard: svg('<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M9 12h6M9 16h4"/>'),
+  book: svg('<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>'),
+  'file-text': svg('<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>'),
+  crosshair: svg('<circle cx="12" cy="12" r="10"/><line x1="22" y1="12" x2="18" y2="12"/><line x1="6" y1="12" x2="2" y2="12"/><line x1="12" y1="6" x2="12" y2="2"/><line x1="12" y1="22" x2="12" y2="18"/>'),
+  plug: svg('<path d="M9 2v6"/><path d="M15 2v6"/><path d="M6 8h12v3a6 6 0 0 1-12 0z"/><path d="M12 17v5"/>'),
+  camera: svg('<path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/>'),
+  shield: svg('<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 11.5 11 13.5 15 9.5"/>'),
+  folder: svg('<path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>'),
+};
+
 const t = zh
   ? {
       title: 'flowtest — 用一句话，让编码代理在真实浏览器里测试你的应用',
@@ -46,10 +63,10 @@ const t = zh
       whatKicker: 'flowtest 是什么',
       whatTitle: '一个循环，四个动作',
       pillars: [
-        { icon: '🗺️', title: 'Plan 计划', body: '自然语言意图变成结构化的 .flow.yaml：步骤、目标、期望条件——你先审，再执行。' },
-        { icon: '▶️', title: 'Run 执行', body: '代理在真实浏览器里逐步执行：语义定位器（按钮“登录”、文本框“邮箱”）驱动，不写 CSS 选择器。' },
-        { icon: '📋', title: 'Report 报告', body: '每步 PASSED / HEALED / FAILED / SKIPPED，截图与耗时入档，先写 result.json 再说话。' },
-        { icon: '🧠', title: 'Learn 学习', body: '失败被提炼成知识库笔记（KnowFlow），下一次计划自动避开已知的坑。' },
+        { icon: 'route', title: 'Plan 计划', body: '自然语言意图变成结构化的 .flow.yaml：步骤、目标、期望条件——你先审，再执行。' },
+        { icon: 'play', title: 'Run 执行', body: '代理在真实浏览器里逐步执行：语义定位器（按钮“登录”、文本框“邮箱”）驱动，不写 CSS 选择器。' },
+        { icon: 'clipboard', title: 'Report 报告', body: '每步 PASSED / HEALED / FAILED / SKIPPED，截图与耗时入档，先写 result.json 再说话。' },
+        { icon: 'book', title: 'Learn 学习', body: '失败被提炼成知识库笔记（KnowFlow），下一次计划自动避开已知的坑。' },
       ],
       howKicker: '怎么运转',
       howTitle: '三步，第一条流程',
@@ -70,12 +87,12 @@ const t = zh
       ftKicker: '还有这些',
       ftTitle: '顺手的细节',
       features: [
-        { icon: '📄', title: '流程即工件', body: '.flow.yaml 简短到一屏读完，又能机械校验——进版本库，进 code review。' },
-        { icon: '♿', title: '语义定位器', body: '目标写角色和名字，不写选择器；控件没有可访问名？那是 SUT 的可访问性 bug，值得报。' },
-        { icon: '🔌', title: '执行器中立', body: '宿主浏览器 MCP 优先，agent-browser CLI 兜底——同一份流程，换宿主照跑。' },
-        { icon: '📸', title: '证据先行', body: '失败与自愈必留截图；result.json 先落盘，摘要后出口。' },
-        { icon: '🩹', title: '自愈有上限', body: '每步最多两次重试，策略入档；放宽过的断言会明说——自愈≠通过。' },
-        { icon: '🗂️', title: '知识库可选', body: 'Learn 默认退化为 lessons/ 笔记；配了 KnowFlow 才进知识库，没有也不挡路。' },
+        { icon: 'file-text', title: '流程即工件', body: '.flow.yaml 简短到一屏读完，又能机械校验——进版本库，进 code review。' },
+        { icon: 'crosshair', title: '语义定位器', body: '目标写角色和名字，不写选择器；控件没有可访问名？那是 SUT 的可访问性 bug，值得报。' },
+        { icon: 'plug', title: '执行器中立', body: '宿主浏览器 MCP 优先，agent-browser CLI 兜底——同一份流程，换宿主照跑。' },
+        { icon: 'camera', title: '证据先行', body: '失败与自愈必留截图；result.json 先落盘，摘要后出口。' },
+        { icon: 'shield', title: '自愈有上限', body: '每步最多两次重试，策略入档；放宽过的断言会明说——自愈≠通过。' },
+        { icon: 'folder', title: '知识库可选', body: 'Learn 默认退化为 lessons/ 笔记；配了 KnowFlow 才进知识库，没有也不挡路。' },
       ],
       ctaTitle: '从第一条旅程开始',
       ctaSub: '克隆、伺服、让代理跑 demo-smoke——两分钟内看到 PASS。',
@@ -105,10 +122,10 @@ const t = zh
       whatKicker: 'What it is',
       whatTitle: 'One loop, four moves',
       pillars: [
-        { icon: '🗺️', title: 'Plan', body: 'A plain-language intent becomes a structured .flow.yaml — steps, targets, expected conditions. You review before anything executes.' },
-        { icon: '▶️', title: 'Run', body: 'Your agent drives a real browser step by step using semantic locators (button “Sign in”, textbox “Email”) — no CSS selectors.' },
-        { icon: '📋', title: 'Report', body: 'Every step lands as PASSED / HEALED / FAILED / SKIPPED with screenshots and timings; the result JSON is written before any summary.' },
-        { icon: '🧠', title: 'Learn', body: 'Failures distill into knowledge-base notes (KnowFlow) so the next Plan avoids known traps.' },
+        { icon: 'route', title: 'Plan', body: 'A plain-language intent becomes a structured .flow.yaml — steps, targets, expected conditions. You review before anything executes.' },
+        { icon: 'play', title: 'Run', body: 'Your agent drives a real browser step by step using semantic locators (button “Sign in”, textbox “Email”) — no CSS selectors.' },
+        { icon: 'clipboard', title: 'Report', body: 'Every step lands as PASSED / HEALED / FAILED / SKIPPED with screenshots and timings; the result JSON is written before any summary.' },
+        { icon: 'book', title: 'Learn', body: 'Failures distill into knowledge-base notes (KnowFlow) so the next Plan avoids known traps.' },
       ],
       howKicker: 'How it runs',
       howTitle: 'Three steps to your first flow',
@@ -129,12 +146,12 @@ const t = zh
       ftKicker: 'Also',
       ftTitle: 'Details you’ll appreciate',
       features: [
-        { icon: '📄', title: 'Flows are artifacts', body: 'A .flow.yaml reads in one screen and validates mechanically — commit it, review it, diff it.' },
-        { icon: '♿', title: 'Semantic locators', body: 'Targets are roles and names, not selectors. A control with no accessible name is an a11y bug in your app worth filing.' },
-        { icon: '🔌', title: 'Executor-neutral', body: 'Host browser MCP first, agent-browser CLI fallback — the same flow runs on either (measured, see ADR-0002).' },
-        { icon: '📸', title: 'Evidence first', body: 'Failures and heals are screenshotted; the result JSON hits disk before anyone speaks.' },
-        { icon: '🩹', title: 'Bounded self-heal', body: 'Max two retries per step, strategies recorded; a loosened assertion says so — healed is weaker than passed.' },
-        { icon: '🗂️', title: 'KB optional', body: 'Learn degrades to plain lesson notes without KnowFlow; the engine never requires a knowledge base.' },
+        { icon: 'file-text', title: 'Flows are artifacts', body: 'A .flow.yaml reads in one screen and validates mechanically — commit it, review it, diff it.' },
+        { icon: 'crosshair', title: 'Semantic locators', body: 'Targets are roles and names, not selectors. A control with no accessible name is an a11y bug in your app worth filing.' },
+        { icon: 'plug', title: 'Executor-neutral', body: 'Host browser MCP first, agent-browser CLI fallback — the same flow runs on either (measured, see ADR-0002).' },
+        { icon: 'camera', title: 'Evidence first', body: 'Failures and heals are screenshotted; the result JSON hits disk before anyone speaks.' },
+        { icon: 'shield', title: 'Bounded self-heal', body: 'Max two retries per step, strategies recorded; a loosened assertion says so — healed is weaker than passed.' },
+        { icon: 'folder', title: 'KB optional', body: 'Learn degrades to plain lesson notes without KnowFlow; the engine never requires a knowledge base.' },
       ],
       ctaTitle: 'Start with one journey',
       ctaSub: 'Clone, serve, run demo-smoke — see PASS within two minutes.',
@@ -261,7 +278,7 @@ const t = zh
           <div class="pillars">
             {t.pillars.map((p) => (
               <div class="pillar">
-                <span class="pillar-icon">{p.icon}</span>
+                <span class="feature-icon" set:html={icons[p.icon]} />
                 <h3>{p.title}</h3>
                 <p>{p.body}</p>
               </div>
@@ -315,7 +332,7 @@ const t = zh
           <div class="features">
             {t.features.map((f) => (
               <div class="feature">
-                <span class="feature-icon">{f.icon}</span>
+                <span class="feature-icon" set:html={icons[f.icon]} />
                 <h3>{f.title}</h3>
                 <p>{f.body}</p>
               </div>
