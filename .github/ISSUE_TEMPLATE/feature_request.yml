@@ -1,0 +1,38 @@
+name: Feature request
+description: Suggest a capability for the engine, KB, demo site, or docs
+labels: [needs-triage]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem would this solve?
+      description: The journey you couldn't test, the report you couldn't read, the trap you keep re-hitting.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What would "works" look like?
+      description: A `.flow.yaml` snippet, a report shape, or a short transcript of you-and-your-agent succeeding.
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Engine (Plan / Run / Report / Learn)
+        - .flow.yaml format
+        - flowtest-kb / KnowFlow wiring
+        - Demo site
+        - Docs / website
+        - Other
+    validations:
+      required: true
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope check
+      options:
+        - label: This fits v0.1's shape (skills, no daemon, no cloud, one SUT at a time) — or I'm proposing to change that shape explicitly
+          required: true

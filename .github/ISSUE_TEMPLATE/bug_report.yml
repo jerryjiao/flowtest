@@ -1,0 +1,60 @@
+name: Bug report
+description: Something in flowtest doesn't work as documented
+labels: [needs-triage]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report. The environment section below is the single
+        most useful part — flowtest runs inside many hosts, so "which host"
+        usually halves the debugging.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Also tell us what you expected instead.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: Commands or agent prompts, verbatim where possible. Include the `.flow.yaml` if one is involved.
+      placeholder: |
+        1. git clone … && cd flowtest
+        2. python3 -m http.server 4173 -d demo
+        3. asked my agent: "Run the flow at …/demo-smoke.flow.yaml"
+    validations:
+      required: true
+  - type: dropdown
+    id: host
+    attributes:
+      label: Host agent
+      options:
+        - Claude Code
+        - zcode
+        - Other SKILL.md host
+        - Not sure
+    validations:
+      required: true
+  - type: input
+    id: versions
+    attributes:
+      label: Versions
+      description: flowtest commit/tag, host version, browser backend (e.g. agent-browser 0.26.0), OS
+      placeholder: flowtest v0.1.0 · agent-browser 0.26.0 · macOS 15
+  - type: textarea
+    id: artifacts
+    attributes:
+      label: Result artifacts
+      description: Paste the `.result.json` verdict block and/or link screenshots. Redact anything sensitive.
+      render: json
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Sanity checks
+      options:
+        - label: The flow validates (`validate_flow.py` exits 0) or the bug is about validation itself
+          required: false
+        - label: No real credentials appear in anything I pasted
+          required: true

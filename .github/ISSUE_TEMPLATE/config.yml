@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Questions & usage
+    url: https://github.com/jerryjiao/flowtest/discussions
+    about: Ask how to write a flow before filing a bug — usage questions live in Discussions.
