@@ -1,0 +1,24 @@
+# flowtest
+
+> Natural-language browser testing for coding agents: describe the user journey, your agent turns it into a `.flow.yaml` plan, runs it in a real browser, reports, and learns from failures.
+
+**Status: early scaffold.** The engine, demo site, and install path land with v0.1 — see [the plan](docs/plans/2026-09-10-rebirth-consensus.md).
+
+## What it does
+
+- **Plan** — turn a plain-language intent ("a user can add a product to the cart and check out") into a structured `.flow.yaml` test plan you can read, edit, and version.
+- **Run** — your coding agent executes the flow in a real browser, step by step, with screenshots.
+- **Report** — structured pass/fail reports per flow, designed for humans and agents alike.
+- **Learn** — failed runs feed a local knowledge base that sharpens future planning. Powered by [KnowFlow](https://github.com/jerryjiao/knowflow), entirely on your machine.
+
+## Why skills, not a framework
+
+flowtest ships as agent skills, not a test framework. Your existing coding agent (Claude Code, zcode, and hosts that follow the SKILL.md convention) is the runtime — no new lock-in, no daemon, and the same agent that writes your app can test it.
+
+## Install
+
+Lands with v0.1 (plugin install for Claude Code / zcode; copyable `skills/` folder for other SKILL.md hosts).
+
+## License
+
+[MIT](LICENSE)

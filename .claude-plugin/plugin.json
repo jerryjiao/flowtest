@@ -1,0 +1,21 @@
+{
+  "name": "flowtest",
+  "version": "0.1.0",
+  "description": "Natural-language browser testing for coding agents: describe the journey, your agent plans it as .flow.yaml, runs it in a real browser, reports, and learns from failures.",
+  "author": {
+    "name": "jerryjiao",
+    "url": "https://github.com/jerryjiao"
+  },
+  "repository": "https://github.com/jerryjiao/flowtest",
+  "license": "MIT",
+  "keywords": [
+    "testing",
+    "e2e",
+    "browser-automation",
+    "llm",
+    "agent",
+    "skills",
+    "qa"
+  ],
+  "skills": []
+}
