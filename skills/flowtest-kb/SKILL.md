@@ -24,6 +24,11 @@ knowflow init flowtest/kb              # workspace inside the SUT repo
 knowflow status                        # confirm raw/ wiki/ and index state
 ```
 
+The `knowflow` CLI resolves its workspace from the **current working
+directory** — after `init`, run every `knowflow` command from inside
+`flowtest/kb/`. Run from elsewhere (e.g. the repo root), it silently operates
+on — or creates — a different workspace.
+
 The workspace lives at `flowtest/kb/` in the SUT repository so lessons version
 with the code they describe. Commit the wiki; keep the index out of git
 (KnowFlow marks its own ignores on init).

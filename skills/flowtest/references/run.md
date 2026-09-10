@@ -41,6 +41,11 @@ Map the flow's primitives onto the backend. Two known conventions:
 | screenshot | screenshot tool → path | `agent-browser screenshot <path>` |
 | current URL / title | snapshot / location tool | `agent-browser get url` / `get title` |
 
+Path gotcha: `agent-browser` resolves relative paths against its daemon's
+CWD, not the invoking shell's — pass **absolute paths** for screenshot
+artifacts, or a relative `flowtest/screenshots/...` can land in an unrelated
+directory.
+
 Snapshot refs are ephemeral: **re-snapshot after every navigation or major DOM
 change**, never reuse refs across loads. For unknown backends, adapt through
 the same primitive set; if a primitive is missing, report the gap instead of

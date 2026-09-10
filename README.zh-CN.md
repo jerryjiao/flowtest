@@ -24,9 +24,12 @@ git clone https://github.com/jerryjiao/flowtest && cd flowtest
 python3 -m http.server 4173 -d demo        # 伺服演示站点
 ```
 
-然后对你的 agent 说：**"运行 `skills/flowtest/examples/demo-smoke.flow.yaml`
-这条流程。"** 引擎 skill 接管：校验 → 解析变量 → 驱动真实浏览器 → 在
+然后对你的 agent 说：**“运行 `skills/flowtest/examples/demo-smoke.flow.yaml`
+这条流程。”** 引擎 skill 接管：校验 → 解析变量 → 驱动真实浏览器 → 在
 `flowtest/reports/` 下写出 result JSON 与报告。
+
+在同一个浏览器里重跑？先在演示站点点**重置演示数据**和 **Sign out**——
+会话还活着时，流程的登录预检会跳过，跑出来是 PARTIAL 而不是 PASS。
 
 想测自己的应用？描述旅程——"测试用户能用邮箱注册并看到确认页"——agent
 会起草流程，**经你确认后**才执行。

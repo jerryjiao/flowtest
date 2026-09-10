@@ -56,5 +56,6 @@ flow demo-smoke: PASS — 9 steps (9 passed, 0 healed) in 70s
 
 - **缺 PyYAML** —— 校验器以退出码 3 说明缺什么（`pip install pyyaml`）。
 - **4173 端口被占** —— 换端口伺服，并改流程里的 `baseUrl`。
-- **已经登录了？** —— 演示会话存在 `sessionStorage`，新浏览器会话默认
-  未登录；应用里也有**重置演示数据**按钮。
+- **重跑变 PARTIAL？** —— 演示会话存在 `sessionStorage`，会话还活着时
+  流程的登录预检会跳过。同一浏览器重跑前，先在演示站点点**重置演示数据**
+  并 **Sign out**。全新浏览器会话默认未登录。

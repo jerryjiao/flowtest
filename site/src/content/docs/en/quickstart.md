@@ -61,6 +61,7 @@ your confirmation** before the browser opens. Confirmed flows move to
   install (`pip install pyyaml`).
 - **Port 4173 busy** — serve on another port and change `baseUrl` in the
   flow.
-- **Signed in already?** — the demo session lives in `sessionStorage`; a
-  fresh browser session starts signed out. The app also has a **Reset demo
-  data** button.
+- **Re-run came back PARTIAL?** — the demo session lives in `sessionStorage`,
+  and the flow's sign-in precheck skips when one is already active. Before
+  re-running in the same browser, click **Reset demo data** and **Sign out**
+  on the demo site. A fresh browser session starts signed out.

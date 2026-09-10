@@ -29,6 +29,10 @@ Then ask your agent: **“Run the flow at
 over: validate → resolve vars → drive a real browser → write the result JSON
 and report under `flowtest/reports/`.
 
+Re-running in the same browser? Click **Reset demo data** and **Sign out** on
+the demo site first — with a live session the flow's sign-in precheck skips
+and the run comes back PARTIAL instead of PASS.
+
 Want to test your own app instead? Describe the journey — “test that a user
 can sign up with an email and verify the confirmation screen” — and the
 agent writes the flow for your confirmation before anything executes.
