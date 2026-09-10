@@ -30,6 +30,19 @@ flowtest is a fresh start: an internal LLM-driven browser-testing solution (Apri
 - **D3** — Website: in-repo `site/` on the knowflow recipe (Astro + Starlight), GitHub Pages deploy, landing page with demo GIF, docs section. ✅ (2026-09-10: bilingual landing (browser-lang redirect) + 6 docs pages × en/zh; GIF captured from a real agent-browser run; pages.yml deploy workflow)
 - **D4** — plugin install verified in zcode; CI (structure tests + secret scan gate); publish v0.1 — repo, site, and plugin together. ✅ (2026-09-10: end-to-end install verified with `claude plugin install flowtest@flowtest` — Skills (2) discovered; installed into zcode the same way as ai-study-kit — git-source marketplace `jerryjiao/flowtest` registered, plugin cached & enabled (`flowtest@flowtest`), records mirror ponytail's root-plugin shape; ci.yml + pages.yml; v0.1.0 tagged, repo public, site live)
 
+## Post-release verification pass — 2026-09-10 (later)
+
+The ticket board (#2–#9) was executed, evidenced, and closed against the live
+state. Gaps found and fixed in the same pass: landing-page emoji icons
+violated the T6 visual gate (replaced with stroke SVGs, deployed and
+re-verified on both locales); community readiness (CONTRIBUTING, issue
+templates, Discussions) landed for T8. T7's clean-environment quickstart run
+is recorded in
+[measurements/2026-09-10-t7-quickstart-verification.md](../measurements/2026-09-10-t7-quickstart-verification.md);
+its non-blocking friction items are tracked in issue #10. Final gates on the
+closing tree: 47 tests green, scrub zero-hit, Mimosa deep scan clean, history
+still single-root.
+
 ## Release gates (hard, pre-publish)
 
 1. Security scan clean (Mimosa high-severity gate or equivalent).
