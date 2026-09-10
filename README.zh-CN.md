@@ -2,7 +2,13 @@
 
 > 给编码 agent 用的自然语言浏览器测试：你描述用户旅程，agent 把它变成 `.flow.yaml` 测试计划，在真实浏览器里执行、出报告、并从失败中学习。
 
-**状态：早期骨架。** 引擎、demo 站和安装方式随 v0.1 落地——见[计划文档](docs/plans/2026-09-10-rebirth-consensus.md)（英文）。
+**状态：v0.1 之前。** 引擎与知识库 skill 已在 [`skills/`](skills/)；demo 站与一键安装随 v0.1 落地——见[计划文档](docs/plans/2026-09-10-rebirth-consensus.md)。
+
+```
+skills/flowtest/       引擎：Plan → Run → Report → Learn（含 .flow.yaml 格式与校验器）
+skills/flowtest-kb/    记忆：本地 KnowFlow 知识库（经验教训 + 产品笔记）
+tests/                 flow 格式校验器测试 + 仓库结构与遗留绑定扫描门禁
+```
 
 ## 它做什么
 

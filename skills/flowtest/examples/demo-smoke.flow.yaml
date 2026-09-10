@@ -1,0 +1,65 @@
+flow: demo-smoke
+title: "Visitor can sign in, create a task, and complete it on the demo site"
+description: >
+  Smoke journey against the in-repo demo site: sign in as the seeded demo
+  user, create one task, mark it done, and confirm the summary counters.
+sut: demo-site
+baseUrl: http://localhost:4173
+tags: [smoke, demo]
+timeout: 120
+stepTimeout: 20
+vars:
+  DEMO_USER: demo@flowtest.dev
+  DEMO_PASSWORD: demo-password
+
+steps:
+  - id: open-app
+    action: goto
+    target: /
+    phase: precheck
+    expect:
+      - element: "heading 'Sign in'"
+
+  - id: fill-email
+    action: fill
+    target: "textbox 'Email'"
+    value: "{{DEMO_USER}}"
+
+  - id: fill-password
+    action: fill
+    target: "textbox 'Password'"
+    value: "{{DEMO_PASSWORD}}"
+
+  - id: submit-signin
+    action: click
+    target: "button 'Sign in'"
+    expect:
+      - element: "heading 'Tasks'"
+      - not_text: "Invalid credentials"
+
+  - id: name-task
+    action: fill
+    target: "textbox 'New task'"
+    value: "Buy oat milk"
+    phase: setup
+
+  - id: add-task
+    action: click
+    target: "button 'Add'"
+    expect:
+      - text: "Buy oat milk"
+
+  - id: complete-task
+    action: click
+    target: "checkbox 'Buy oat milk'"
+    phase: verify
+
+  - id: confirm-done
+    action: check
+    expect:
+      - element: "listitem 'Buy oat milk'"
+    screenshot: true
+
+  - id: grab-summary
+    action: extract
+    value: [open-count, done-count]

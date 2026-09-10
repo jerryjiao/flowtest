@@ -7,3 +7,4 @@
 - **System Under Test (SUT)** — whatever web app a Flow targets; the Demo Site is one instance, the user's own app is another.
 - **Knowledge Base (KB)** — a [KnowFlow](https://github.com/jerryjiao/knowflow) workspace holding product docs and failure notes, queried during Plan. Optional.
 - **Learn** — the step where failed runs are distilled into KB notes so future Plans avoid known traps.
+- **Result** — the `.result.json` written by every run: per-step statuses (PASSED / HEALED / FAILED / SKIPPED), timings, evidence paths, and the flow-level verdict (PASS / PARTIAL / FAIL). Reports and lessons are derived from it.

@@ -4,7 +4,9 @@ build/
 .env
 .env.*
 !.env.example
-reports/
 *.log
 .DS_Store
+__pycache__/
+.mimosa/
 .knowflow/
+flowtest/screenshots/

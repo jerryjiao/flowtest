@@ -17,5 +17,8 @@
     "skills",
     "qa"
   ],
-  "skills": []
+  "skills": [
+    "skills/flowtest",
+    "skills/flowtest-kb"
+  ]
 }
