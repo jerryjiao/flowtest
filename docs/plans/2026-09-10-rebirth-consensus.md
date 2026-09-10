@@ -14,6 +14,7 @@ flowtest is a fresh start: an internal LLM-driven browser-testing solution (Apri
 | 6 | License / docs | MIT; bilingual README (EN primary, zh-CN mirror) |
 | 7 | Demo target | In-repo offline Demo Site (forms, multi-step flows, list CRUD) — deterministic, no external services, first flow runs within ~10 minutes of cloning |
 | 8 | Browser executor | Decided by measurement at D1: keep the legacy `agent-browser` path vs switch to Playwright — whichever gets a newcomer from zero to first passing flow faster |
+| 9 | Website | knowflow-style site: in-repo `site/` (Astro + Starlight), GitHub Pages at `jerryjiao.github.io/flowtest` — landing page with a recorded demo GIF + docs section. No custom domain in v0.1; interactive demo deferred to v0.2 |
 
 ## Non-goals for v0.1
 
@@ -25,8 +26,9 @@ flowtest is a fresh start: an internal LLM-driven browser-testing solution (Apri
 
 - **D0** — name check, scaffold (this repo), consensus + ADR-0001 + glossary, fresh history. ✅
 - **D1** — port the Engine skill; scrub all legacy bindings (IPs, vendor lock-ins, client-specific material); rewrite KB as a KnowFlow-contract skill.
-- **D2** — Demo Site; measure the end-to-end quickstart (Plan → Run → Report); measure KnowFlow recall quality for planning, downgrade to optional if weak.
-- **D3** — plugin install verified in zcode; CI (structure tests + secret scan gate); publish v0.1.
+- **D2** — Demo Site; measure the end-to-end quickstart (Plan → Run → Report); measure KnowFlow recall quality for planning (downgrade to optional if weak); measure executor choice (agent-browser vs Playwright).
+- **D3** — Website: in-repo `site/` on the knowflow recipe (Astro + Starlight), GitHub Pages deploy, landing page with demo GIF, docs section.
+- **D4** — plugin install verified in zcode; CI (structure tests + secret scan gate); publish v0.1 — repo, site, and plugin together.
 
 ## Release gates (hard, pre-publish)
 
